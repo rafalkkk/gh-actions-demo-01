@@ -6,7 +6,7 @@ app.MapGet("/", () => "Hello World!");
 app.MapGet("/secret", (string? password) => 
 {
   if (password == "secret123"){
-    return "Nice you are our agent"
+    return "Nice you are our agent";
   }
   else {
     return "Access denied";
