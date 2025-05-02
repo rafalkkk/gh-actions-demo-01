@@ -17,7 +17,11 @@ jobs:
 
       - name: gh auth status
         run: gh auth status
+        env:
+          GH_TOKEN: "${{secrets.GITHUB_TOKEN}}"
 
       - name: gh workflow list
         run: gh workflow list
+        env:
+          GH_TOKEN: "${{secrets.GITHUB_TOKEN}}"
         
