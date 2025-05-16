@@ -7,7 +7,7 @@ on:
       - "py-upper/**"
   workflow_dispatch:
 
-jobssssssssssssssss:
+jobs:
   test:
     runs-on: ubuntu-latest
     strategy:
