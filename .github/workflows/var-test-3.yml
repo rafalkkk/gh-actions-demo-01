@@ -20,7 +20,7 @@ jobs:
         run: |
           echo "Value: ${{ env.MY_VAR }}"
 
-      - name: Consume in step 3
+      - name: Consume in step 4
         run: |
           echo "Value: $LOCAL_VAR"
         env:
@@ -39,11 +39,11 @@ jobs:
         run: |
           echo "Value: $MY_VAR"
 
-      - name: Consume in step 2
+      - name: Consume in step 3
         run: |
           echo "Value: ${{ steps.my_step.outputs.MY_VAR }}"
 
-      - name: Consume output step 3
+      - name: Consume output step 4
         run: |
           echo "Value: $LOCAL_VAR"
         env:
