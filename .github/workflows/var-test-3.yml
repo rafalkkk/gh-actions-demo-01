@@ -10,21 +10,21 @@ jobs:
     steps:
       - name: Set env variable
         id: my_step  
-        run: echo "MY_VALUE=Hello World" >> $GITHUB_ENV
+        run: echo "MY_VAR=Hello World" >> $GITHUB_ENV
 
       - name: Consume in step 2
         run: |
-          echo "Value: $MY_VALUE"
+          echo "Value: $MY_VAR"
 
       - name: Consume in step 3
         run: |
-          echo "Value: ${{ env.MY_VALUE }}"
+          echo "Value: ${{ env.MY_VAR }}"
 
       - name: Consume in step 3
         run: |
-          echo "Value: $LOCAL_VAL"
+          echo "Value: $LOCAL_VAR"
         env:
-          LOCAL_VAL: ${{ env.MY_VALUE }} 
+          LOCAL_VAR: ${{ env.MY_VAR }} 
 
 
   pass_output:
@@ -33,14 +33,18 @@ jobs:
     steps:
       - name: Set output variable
         id: my_step  
-        run: echo "MY_VALUE=Hello World" >> $GITHUB_OUTPUT
+        run: echo "MY_VAR=Hello World" >> $GITHUB_OUTPUT
+
+      - name: Consume in step 2 (not ok)
+        run: |
+          echo "Value: $MY_VAR"
 
       - name: Consume in step 2
         run: |
-          echo "Value: ${{ steps.my_step.outputs.MY_VALUE }}"
+          echo "Value: ${{ steps.my_step.outputs.MY_VAR }}"
 
       - name: Consume output step 3
         run: |
-          echo "Value: $my_value"
+          echo "Value: $LOCAL_VAR"
         env:
-          my_value: ${{ steps.my_step.outputs.MY_VALUE }}
+          LOCAL_VAR: ${{ steps.my_step.outputs.MY_VAR }}
