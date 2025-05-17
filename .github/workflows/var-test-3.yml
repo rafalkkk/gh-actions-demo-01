@@ -36,9 +36,11 @@ jobs:
         run: echo "MY_VALUE=Hello World" >> $GITHUB_OUTPUT
 
       - name: Consume in step 2
-        run: echo "Value: ${{ steps.my_step.outputs.MY_VALUE }}"
+        run: |
+          echo "Value: ${{ steps.my_step.outputs.MY_VALUE }}"
 
       - name: Consume output step 3
-        run: echo "Value: $my_value"
+        run: |
+          echo "Value: $my_value"
         env:
           my_value: ${{ steps.my_step.outputs.MY_VALUE }}
