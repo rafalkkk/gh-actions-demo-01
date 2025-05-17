@@ -1,5 +1,6 @@
 name: Variable test - pass value between steps
 
+jobs:
   pass_env:
     runs-on: ubuntu-latest
 
