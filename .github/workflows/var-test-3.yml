@@ -9,4 +9,4 @@ jobs:
       - name: Set env variable
         run: echo "MY_VALUE=ABC" >> $GITHUB_ENV
       - name: Use environment variable directly
-        run: echo "Value: $MY_VALUE"
+        run: echo "Value: ${{ env.MY_VALUE }}"
