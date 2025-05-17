@@ -11,7 +11,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Debug event payload 
-        run: echo '${{ toJson(github.event) }}'
+        env:
+          EVENT_JSON: ${{ toJson(github.event) }}
+        run: echo "$EVENT_JSON"
 
       - name: Add the comment
         id: add_comment
