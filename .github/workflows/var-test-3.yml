@@ -11,9 +11,11 @@ jobs:
 
       - name: Consume in step 2
         run: echo "Value: $MY_VALUE"
+        env:
+            MY_VALUE: ${{ env.MY_VALUE }}
 
-      - name: Consume in step 3
-        run: echo "Value: $MY_VALUE"
+      # - name: Consume in step 3
+      #   run: echo "Value: $MY_VALUE"
 
 
   pass_output:
