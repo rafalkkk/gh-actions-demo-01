@@ -6,7 +6,21 @@ jobs:
   pass_env:
     runs-on: ubuntu-latest
     steps:
-      - name: Set env variable
-        run: echo "MY_VALUE=ABC" >> $GITHUB_ENV
-      - name: Use environment variable directly
-        run: echo "Value: ${{ env.MY_VALUE }}"
+      - name: Set ENV var
+        run: |
+          echo "CUSTOM_VAR=IT WORKS" >> $GITHUB_ENV
+
+      - name: Use ENV var via `env` block
+        run: |
+          echo $CUSTOM_VAR # OK
+          echo ${{ env.CUSTOM_VAR }} # OK
+          echo $USE_CUSTOM_VAR # NOT OK, prints ''
+          echo ${{ env.USE_CUSTOM_VAR }} # NOT OK, prints ''
+          echo $USE_CUSTOM_VAR_2 # NOT OK, prints '$CUSTOM_VAR'
+          echo ${{ env.USE_CUSTOM_VAR_2 }} # OK
+          echo $USE_CUSTOM_VAR_3 # NOT OK, prints '$GLOBAL_WORKFLOW_ENV'
+          echo ${{ env.USE_CUSTOM_VAR_3 }} # OK
+        env:
+          USE_CUSTOM_VAR: ${{ env.CUSTOM_VAR }}
+          USE_CUSTOM_VAR_2: $CUSTOM_VAR
+          USE_CUSTOM_VAR_3: $GLOBAL_WORKFLOW_ENV
