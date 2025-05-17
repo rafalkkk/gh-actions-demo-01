@@ -1,0 +1,32 @@
+name: Variable test - pass value between steps
+
+  pass_env:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Set env variable
+        id: my_step  
+        run: echo "MY_VALUE=Hello World" >> $GITHUB_ENV
+
+      - name: Consume in step 2
+        run: echo "Value: $MY_VALUE"
+
+      - name: Consume in step 3
+        run: echo "Value: $MY_VALUE"
+
+
+  pass_output:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Set output variable
+        id: my_step  
+        run: echo "MY_VALUE=Hello World" >> $GITHUB_OUTPUT
+
+      - name: Consume in step 2
+        run: echo "Value: ${{ steps.my_step.outputs.MY_VALUE }}"
+
+      - name: Consume output step 3
+        run: echo "Value: $my_value"
+        env:
+          my_value: ${{ steps.my_step.outputs.MY_VALUE }}
