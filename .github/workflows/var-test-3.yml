@@ -1,16 +1,44 @@
 name: Variable test - pass value between steps
+
 on:
-  workflow_dispatch
-  
+  workflow_dispatch:
+
 jobs:
   pass_env:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Set the value
-        id: step_one
-        run: echo "action_state=yellow" >> "$GITHUB_ENV"
-      - name: Use the value
-        id: step_two
-        run: echo "ACTION STATE IS: $action_state" 
+      - name: Set env variable
+        id: my_step  
+        run: echo "MY_VALUE=Hello World" >> $GITHUB_ENV
 
+      - name: Consume in step 2
+        run: |
+          echo "Value: $MY_VALUE"
+
+      - name: Consume in step 3
+        run: |
+          echo "Value: ${{ env.MY_VALUE }}"
+
+      - name: Consume in step 3
+        run: |
+          echo "Value: $LOCAL_VAL"
+        env:
+          LOCAL_VAL: ${{ env.MY_VALUE }} 
+
+
+  pass_output:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Set output variable
+        id: my_step  
+        run: echo "MY_VALUE=Hello World" >> $GITHUB_OUTPUT
+
+      - name: Consume in step 2
+        run: echo "Value: ${{ steps.my_step.outputs.MY_VALUE }}"
+
+      - name: Consume output step 3
+        run: echo "Value: $my_value"
+        env:
+          my_value: ${{ steps.my_step.outputs.MY_VALUE }}
