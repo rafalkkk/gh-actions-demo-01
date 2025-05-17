@@ -1,6 +1,6 @@
 name: Variable test - pass value between steps
 on:
-  workflow_dispatch:
+  workflow_dispatch
 
 jobs:
   pass_env:
