@@ -6,13 +6,10 @@ jobs:
 
     steps:
       - name: Set env variable
-        id: my_step  
         run: echo "MY_VALUE=Hello World" >> $GITHUB_ENV
 
       - name: Consume in step 2
         run: echo "Value: $MY_VALUE"
-        env:
-          MY_VALUE: ${{ env.MY_VALUE }}
 
       # - name: Consume in step 3
       #   run: echo "Value: $MY_VALUE"
