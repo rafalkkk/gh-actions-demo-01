@@ -54,15 +54,18 @@ jobs:
       - name: Login to Azure
         uses: azure/login@v2
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_A0A2CD995E0645F78ED6AA8CAD143510 }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_196F2FFFE39B45A8B83AC411E0CADD28 }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_2E1FD8EAA29B4C62AC564F56A2D101B8 }}
+          # client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_A0A2CD995E0645F78ED6AA8CAD143510 }}
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID }}
+          # tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_196F2FFFE39B45A8B83AC411E0CADD28 }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID }}
+          # subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_2E1FD8EAA29B4C62AC564F56A2D101B8 }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID }}
 
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v3
         with:
-          app-name: 'demoapp1725'
+          app-name: ${{ vars.APP_NAME }}
           slot-name: 'Production'
           package: .
           
